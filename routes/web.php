@@ -12,51 +12,34 @@ use Illuminate\Support\Arr;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/jobs', function () {
-    //return '<h1>Hello from about page.</h1>';
-    //return ['foo' => 'bar']; // return array
-    return view('jobs', [
-        'jobs' => [
-            [
-                'id' => 1,
-                'title' => 'Director',
-                'salary' => '$50,000'
-            ],
-            [
-                'id' => 2,
-                'title' => 'Programer',
-                'salary' => '$150,000'
-            ],
-            [
-                'id' => 3,
-                'title' => 'Teacher',
-                'salary' => '$80,000'
-            ]
-        ]
-    ]);
-});
-Route::get('/jobs/{id}', function ($id) {
-    $jobs = [
-        [
+$jobs = [
+    [
         'id' => 1,
         'title' => 'Director',
         'salary' => '$50,000'
-        ],
-        [
-            'id' => 2,
-            'title' => 'Programer',
-            'salary' => '$150,000'
-        ],
-        [
-            'id' => 3,
-            'title' => 'Teacher',
-            'salary' => '$80,000'
-        ]
-        ];
+    ],
+    [
+        'id' => 2,
+        'title' => 'Programer',
+        'salary' => '$150,000'
+    ],
+    [
+        'id' => 3,
+        'title' => 'Teacher',
+        'salary' => '$80,000'
+    ]
+    ];
+Route::get('/', function () {
+    return view('home');
+});
+Route::get('/jobs', function () use ($jobs) {
+    //return '<h1>Hello from about page.</h1>';
+    //return ['foo' => 'bar']; // return array
+    return view('jobs', [
+        'jobs' => $jobs,
+    ]);
+});
+Route::get('/jobs/{id}', function ($id) use ($jobs) {
    /* Arr::first($jobs, function ($job) use ($id) {
         if ($job['id'] == $id){
             return dd($job);
