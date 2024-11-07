@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use Illuminate\Support\Arr;
+
 class Job {
     public static function all(): array
     {
@@ -20,6 +22,10 @@ class Job {
                 'title' => 'Teacher',
                 'salary' => '$80,000'
             ]
-    ];
-}
+        ];
+    }
+    public static function find(int $id): array {
+        return $job = Arr::first(static::all(), fn($job) => $job['id'] == $id);
+
+    }
 }
