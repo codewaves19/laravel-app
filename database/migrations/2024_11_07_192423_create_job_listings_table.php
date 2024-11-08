@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('job_listings', function (Blueprint $table) {
             $table->id();
+            //$table->unsignedBigInteger('employer_id'); // as 'id' above is of type BigInteger thats why using BigInteger type also as when we generate a foreign key the type should be identical
+            $table->foreignIdFor(\App\Models\Employer::class);
             $table->string('title');
             $table->string('salary');
             $table->timestamps();

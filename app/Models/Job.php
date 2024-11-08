@@ -10,5 +10,9 @@ class Job extends Model {
     protected $table = 'job_listings';
     protected $fillable = ['title', 'salary']; // Only these are allowed to mass assign
     // all attributes allowed to mass assigned. If someone try to change user id, it will be ignored
+
+    public function employer() {
+        return $this->belongsTo(Employer::class);
+    }
     
 }
