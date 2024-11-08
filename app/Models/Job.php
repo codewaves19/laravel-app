@@ -28,7 +28,10 @@ class Job {
         $job = Arr::first(static::all(), fn($job) => $job['id'] == $id);
         // if no jobs matches
         if (! $job) {
+            //return [];
             abort(404);
+        } else {
+            return $job;
         }
     }
 }
