@@ -1,37 +1,11 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Model;
 
-class Job {
-    public static function all(): array
-    {
-        return [
-            [
-                'id' => 1,
-                'title' => 'Director',
-                'salary' => '$50,000'
-            ],
-            [
-                'id' => 2,
-                'title' => 'Programer',
-                'salary' => '$150,000'
-            ],
-            [
-                'id' => 3,
-                'title' => 'Teacher',
-                'salary' => '$80,000'
-            ]
-        ];
-    }
-    public static function find(int $id): array {
-        $job = Arr::first(static::all(), fn($job) => $job['id'] == $id);
-        // if no jobs matches
-        if (! $job) {
-            //return [];
-            abort(404);
-        } else {
-            return $job;
-        }
-    }
+class Job extends Model {
+    protected $table = 'job_listings';
+    protected $fillable = ['title', 'salary']; // Only these are allowed to mass assign
+    // all attributes allowed to mass assigned. If someone try to change user id, it will be ignored
+    
 }
