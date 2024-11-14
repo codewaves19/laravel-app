@@ -17,7 +17,10 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/jobs', function () {
-    $jobs = Job::with('employer')->simplePaginate(3); // get all records using Eager Loading
+    //$jobs = Job::with('employer')->paginate(3); // get all records using Eager Loading
+    //$jobs = Job::with('employer')->simplePaginate(3); // just next and previous buttons
+    $jobs = Job::with('employer')->cursorPaginate(3); // no page number is shown in url
+
     //$jobs = Job::all(); // Lazy Loading
 	// Eager load employer relationship
 	// give me all jobs with the employer for each one
