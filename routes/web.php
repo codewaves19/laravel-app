@@ -17,8 +17,14 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/jobs', function () {
+    $jobs = Job::with('employer')->get(); // get all records using Eager Loading
+    //$jobs = Job::all(); // Lazy Loading
+	// Eager load employer relationship
+	// give me all jobs with the employer for each one
+    // select * from `employers` where `employers`.`id` in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    // one single query
     return view('jobs', [
-        'jobs' => Job::all()
+        'jobs' => $jobs
     ]);
 });
 Route::get('/jobs/{id}', function ($id) {
