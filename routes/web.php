@@ -16,6 +16,8 @@ use App\Models\Job;
 Route::get('/', function () {
     return view('home');
 });
+
+// index
 Route::get('/jobs', function () {
     $jobs = Job::with('employer')->latest()->paginate(3); // get all records using Eager Loading
     //$jobs = Job::with('employer')->simplePaginate(3); // just next and previous buttons
@@ -31,11 +33,13 @@ Route::get('/jobs', function () {
     ]);
 });
 
+// Create
 Route::get('/jobs/create', function () {
  //dd($job);
    return view('jobs.create');
  });
 
+ // Store
  Route::post('/jobs', function () {
     //dd(request()->all());
     // skipping validation
@@ -57,12 +61,19 @@ Route::get('/jobs/create', function () {
     return redirect('jobs');
     });
 
+// Show
 Route::get('/jobs/{id}', function ($id) {
    $job = Job::find($id);
 //dd($job);
   return view('jobs.show', ['job' => $job]);
 });
 
+// Edit
+Route::get('/jobs/{id}/edit', function ($id) {
+  $job = Job::find($id);
+//dd($job);
+ return view('jobs.edit', ['job' => $job]);
+});
 Route::get('/contact', function () {
     return view('contact');
 });
