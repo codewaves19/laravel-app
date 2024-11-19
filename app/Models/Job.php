@@ -8,7 +8,7 @@ class Job extends Model {
     use HasFactory;
 
     protected $table = 'job_listings';
-    protected $fillable = ['title', 'salary']; // Only these are allowed to mass assign
+    protected $fillable = ['title', 'salary', 'employer_id']; // Only these are allowed to mass assign
     // all attributes allowed to mass assigned. If someone try to change user id, it will be ignored
 
     public function employer() {
