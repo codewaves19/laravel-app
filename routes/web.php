@@ -39,6 +39,8 @@ Route::get('/jobs/create', function () {
  Route::post('/jobs', function () {
     //dd(request()->all());
     // skipping validation
+
+    //client side validation is that which field is required to be not empty so go to form view and add required attribute to input tag
     Job::create([
       'title' => request('title'),
       'salary' => request('salary'),
