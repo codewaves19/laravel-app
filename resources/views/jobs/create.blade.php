@@ -27,12 +27,12 @@
             </div>
           </div>
         </div>
-        <div>
+        <div class="mt-10">
         <!-- #errors is blade attribute which is always present for any kind of validation errors -->
         @if($errors->any())
         <ul>
           @foreach($errors->all() as $error)
-          <li>{{ $error }}</li>
+          <li class="text-red-500 italic">{{ $error }}</li>
           @endforeach
         </ul>
         @endif
