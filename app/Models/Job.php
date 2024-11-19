@@ -8,9 +8,10 @@ class Job extends Model {
     use HasFactory;
 
     protected $table = 'job_listings';
-    protected $fillable = ['title', 'salary', 'employer_id']; // Only these are allowed to mass assign
+   // protected $fillable = ['title', 'salary', 'employer_id']; // Only these are allowed to mass assign
     // all attributes allowed to mass assigned. If someone try to change user id, it will be ignored
-
+// to avoid fillable variable to add fields whenever a new field is created, we insteAD make a list of guarded fields
+    protected $guarded = []; // mno fields to be guarded
     public function employer() {
         return $this->belongsTo(Employer::class);
     }
