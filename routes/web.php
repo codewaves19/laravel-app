@@ -41,6 +41,13 @@ Route::get('/jobs/create', function () {
     // skipping validation
 
     //client side validation is that which field is required to be not empty so go to form view and add required attribute to input tag
+    // here is server side validation
+    // provide here one or more validations rules
+    request()->validate([
+      'title' => ['required', 'min:3'],
+      'salary' => ['required']
+    ]);
+    // if the above validation fails it will never run the next link and returns back to previous url
     Job::create([
       'title' => request('title'),
       'salary' => request('salary'),
