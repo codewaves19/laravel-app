@@ -74,6 +74,47 @@ Route::get('/jobs/{id}/edit', function ($id) {
 //dd($job);
  return view('jobs.edit', ['job' => $job]);
 });
+
+// Update
+Route::patch('/jobs/{id}', function ($id) {
+  // validate
+  request()->validate([
+    'title' => ['required', 'min:3'],
+    'salary' => ['required']
+  ]);
+  // autheticate whether user has permission to update
+  // update the Job
+  //$job = Job::find($id); // if id doesnot exist it will return NULL, so we use findOrFail() method and laravel will display apropriate message to user
+  $job = Job::findOrFail($id);
+  // research on Route Model Binding to get laravel do all fetching work and avoid manual fetching of data
+  
+  // method 1 to update data
+  //$job->title = request('title');
+  //$job->salary = request('salary');
+  //$job->save();
+
+  // Method 2 to update data
+  $job->update([
+    'title' => request('title'),
+    'salary' => request('salary')
+  ]);
+  // and persist
+  // redirect to job page
+return redirect('/jobs/'.$job->id);
+
+});
+
+// Destroy
+Route::delete('/jobs/{id}', function ($id) {
+  // autherize the request
+
+  // Delete the Job
+  $job = Job::findOrFail($id);
+  $job->delete();
+  // redirect
+  return redirect('/jobs');
+});
+
 Route::get('/contact', function () {
     return view('contact');
 });
