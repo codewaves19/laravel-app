@@ -109,8 +109,11 @@ Route::delete('/jobs/{id}', function ($id) {
   // autherize the request
 
   // Delete the Job
-  $job = Job::findOrFail($id);
-  $job->delete();
+  //$job = Job::findOrFail($id);
+  //dd($job);
+ // $job->delete();
+  Job::findOrFail($id)->delete();
+
   // redirect
   return redirect('/jobs');
 });

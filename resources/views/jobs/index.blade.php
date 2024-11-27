@@ -10,6 +10,12 @@
         <strong>{{ $job['title'] }}:</strong> Pays {{ $job['salary'] }} per years.
         </div>
     </a>
+    <form method="POST" action="/jobs/{{ $job->id }}" id="delete-form">
+        @csrf
+        @method('DELETE')
+        <button type="submit" id="delete-form" class="text-red-500 text-sm font-bold">Delete</button>
+    
+      </form>
     @endforeach
     <div>{{ $jobs->links() }}</div>
 </div>
