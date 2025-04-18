@@ -14,110 +14,74 @@ use App\Models\Job;
 */
 
 Route::get('/', function () {
-    return view('home');
+  return view('home');
 });
 
 // index
 Route::get('/jobs', function () {
-    $jobs = Job::with('employer')->latest()->paginate(3); // get all records using Eager Loading
-    //$jobs = Job::with('employer')->simplePaginate(3); // just next and previous buttons
-    //$jobs = Job::with('employer')->cursorPaginate(3); // no page number is shown in url
-
-    //$jobs = Job::all(); // Lazy Loading
-	// Eager load employer relationship
-	// give me all jobs with the employer for each one
-    // select * from `employers` where `employers`.`id` in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-    // one single query
-    return view('jobs.index', [
-        'jobs' => $jobs
-    ]);
+  $jobs = Job::with('employer')->latest()->paginate(3);
+  return view('jobs.index', [
+    'jobs' => $jobs
+  ]);
 });
 
 // Create
 Route::get('/jobs/create', function () {
- //dd($job);
-   return view('jobs.create');
- });
-
- // Store
- Route::post('/jobs', function () {
-    //dd(request()->all());
-    // skipping validation
-
-    //client side validation is that which field is required to be not empty so go to form view and add required attribute to input tag
-    // here is server side validation
-    // provide here one or more validations rules
-    request()->validate([
-      'title' => ['required', 'min:3'],
-      'salary' => ['required']
-    ]);
-    // if the above validation fails it will never run the next link and returns back to previous url
-    Job::create([
-      'title' => request('title'),
-      'salary' => request('salary'),
-      'employer_id' => 1
-    ]);
-
-    return redirect('jobs');
-    });
+  return view('jobs.create');
+});
 
 // Show
-Route::get('/jobs/{id}', function ($id) {
-   $job = Job::find($id);
-//dd($job);
+Route::get('/jobs/{job}', function (Job $job) {
   return view('jobs.show', ['job' => $job]);
 });
 
-// Edit
-Route::get('/jobs/{id}/edit', function ($id) {
-  $job = Job::find($id);
-//dd($job);
- return view('jobs.edit', ['job' => $job]);
-});
-
-// Update
-Route::patch('/jobs/{id}', function ($id) {
-  // validate
+// Store
+Route::post('/jobs', function () {
   request()->validate([
     'title' => ['required', 'min:3'],
     'salary' => ['required']
   ]);
-  // autheticate whether user has permission to update
-  // update the Job
-  //$job = Job::find($id); // if id doesnot exist it will return NULL, so we use findOrFail() method and laravel will display apropriate message to user
-  $job = Job::findOrFail($id);
-  // research on Route Model Binding to get laravel do all fetching work and avoid manual fetching of data
-  
-  // method 1 to update data
-  //$job->title = request('title');
-  //$job->salary = request('salary');
-  //$job->save();
+  // if the above validation fails it will never run the next link and returns back to previous url
+  Job::create([
+    'title' => request('title'),
+    'salary' => request('salary'),
+    'employer_id' => 1
+  ]);
 
-  // Method 2 to update data
+  return redirect('jobs');
+});
+
+// Edit
+Route::get('/jobs/{job}/edit', function (Job $job) {
+  return view('jobs.edit', ['job' => $job]);
+});
+
+// Update
+Route::patch('/jobs/{job}', function (Job $job) {
+  // authorize here
+
+  request()->validate([
+    'title' => ['required', 'min:3'],
+    'salary' => ['required']
+  ]);
+  
   $job->update([
     'title' => request('title'),
     'salary' => request('salary')
   ]);
-  // and persist
-  // redirect to job page
-return redirect('/jobs/'.$job->id);
 
+  return redirect('/jobs/' . $job->id);
 });
 
 // Destroy
-Route::delete('/jobs/{id}', function ($id) {
+Route::delete('/jobs/{job}', function (Job $job) {
   // autherize the request
 
-  // Delete the Job
-  //$job = Job::findOrFail($id);
-  //dd($job);
- // $job->delete();
-  Job::findOrFail($id)->delete();
+  $job->delete();
 
-  // redirect
   return redirect('/jobs');
 });
 
 Route::get('/contact', function () {
-    return view('contact');
+  return view('contact');
 });
