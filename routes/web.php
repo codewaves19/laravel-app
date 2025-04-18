@@ -30,4 +30,8 @@ Route::view('/', 'home');
 
 Route::resource('jobs', JobController::class);
 
+// Route::resource('jobs', JobController::class, [
+//     'only' => ['index', 'show'] // or 'except' => ['create', 'store', 'edit', 'update', 'destroy']
+// ]);
+
 Route::view('/contact', 'contact');
