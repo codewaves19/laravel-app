@@ -13,6 +13,8 @@ use App\Models\Job;
 |
 */
 
+// Till now we learnt about code for small projects but for large projects we use dedicated controllers, check it now...
+
 Route::get('/', function () {
   return view('home');
 });
