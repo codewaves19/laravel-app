@@ -45,8 +45,8 @@
         </div>
 
         <div class="mt-6 flex items-center justify-end gap-x-6">
-            <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
-            <x-form-button type="submit">Save</x-form-button>
+            <a href="/" class="text-sm/6 font-semibold text-gray-900">Cancel</a>
+            <x-form-button type="submit">Register</x-form-button>
         </div>
     </form>
 </x-layout>
