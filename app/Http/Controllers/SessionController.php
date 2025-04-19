@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class RegisteredUserController extends Controller
+class SessionController extends Controller
 {
-    // create
+    // create_function
     public function create()
     {
-        //dd('hello');
-       return view('auth.register');
+        return view('auth.login');
     }
-    // store
+
+    // store_function
     public function store(Request $request)
     {
         dd($request->all());
     }
+
 }
