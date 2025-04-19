@@ -10,34 +10,34 @@
                     <x-form-field>
                         <x-form-label for="first_name">First Name</x-form-label>
                         <div class="mt-2">
-                            <x-form-input type="text" name="first_name" id="first_name" />
+                            <x-form-input type="text" name="first_name" id="first_name" required />
                             <x-form-error name="first_name" />
                     </x-form-field>
                 </div>
                 <x-form-field>
                     <x-form-label for="last_name">Last Name</x-form-label>
                     <div class="mt-2">
-                        <x-form-input type="text" name="last_name" id="last_name" />
+                        <x-form-input type="text" name="last_name" id="last_name" required />
                         <x-form-error name="last_name" />
                 </x-form-field>
 
                 <x-form-field>
                     <x-form-label for="email">Email</x-form-label>
                     <div class="mt-2">
-                        <x-form-input type="email" name="email" id="email" />
+                        <x-form-input type="email" name="email" id="email" required />
                         <x-form-error name="email" />
                 </x-form-field>
                 <x-form-field>
                     <x-form-label for="password">Password</x-form-label>
                     <div class="mt-2">
-                        <x-form-input type="password" name="password" id="password" />
+                        <x-form-input type="password" name="password" id="password" required />
                         <x-form-error name="password" />
                 </x-form-field>
                 <x-form-field>
                     <x-form-label for="password_confirmation">Confirm Password</x-form-label>
                     <div class="mt-2">
-                        <x-form-input type="password_confirmation" name="password_confirmation"
-                            id="password_confirmation" />
+                        <x-form-input type="password" name="password_confirmation"
+                            id="password_confirmation" required />
                         <x-form-error name="password_confirmation" />
                 </x-form-field>
             </div>
