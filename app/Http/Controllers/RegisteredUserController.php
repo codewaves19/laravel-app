@@ -12,4 +12,9 @@ class RegisteredUserController extends Controller
         //dd('hello');
        return view('auth.register');
     }
+    // store
+    public function store(Request $request)
+    {
+        dd('Store it!');
+    }
 }
