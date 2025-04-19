@@ -10,30 +10,29 @@
         <p class="mt-1 text-sm/6 text-gray-600">We just need handful of details.</p>
   
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-4">
+          <x-form-field>
             <x-form-label for="title">Title</x-form-label>
             <div class="mt-2">
               <x-form-input 
                 type="text" 
                 name="title" 
                 id="title" 
-                class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm/6" 
                 placeholder="Shift leader" 
-                required />
+                 />
               <x-form-error name="title" />
-            </div>
+            </x-form-field>
           </div>
-          <div class="sm:col-span-4">
-            <label for="salary" class="block text-sm/6 font-medium text-gray-900">Salary</label>
+          <x-form-field>
+            <x-form-label for="salary">Salary</x-form-label>
             <div class="mt-2">
-              <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                <input type="text" name="salary" id="salary" class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm/6" placeholder="$50,000 per month" required>
-              </div>
-              @error('salary')
-              <p class="text-xs text-red-500 text-semi-bold mt-1">{{ $message }}</p>
-            @enderror
-            </div>
-          </div>
+              <x-form-input 
+                type="text" 
+                name="salary" 
+                id="salary" 
+                placeholder="$50,000 per month" 
+                 />
+              <x-form-error name="salary" />
+            </x-form-field>
         </div>
       </div>
     </div>
