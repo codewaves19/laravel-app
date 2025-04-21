@@ -27,8 +27,8 @@ class AppServiceProvider extends ServiceProvider
         Model::preventLazyLoading();
         // be careful there is preventsLazyLoading also which is not what we require…it returns a boolean value
         //Paginator::useBootstrapFive();
-        Gate::define('edit-job', function (User $user, Job $job) { // this will always fail for guest users
-            return $job->employer->user->is($user); // check even if you are not logged in 
-        }); // Now accessible globally
+        // Gate::define('edit-job', function (User $user, Job $job) { // this will always fail for guest users
+        //     return $job->employer->user->is($user); // check even if you are not logged in 
+        // }); // Now accessible globally
     }
 }

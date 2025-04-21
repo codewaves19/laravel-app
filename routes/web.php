@@ -25,20 +25,13 @@ Route::controller(JobController::class)->group(function () {
     Route::get('/jobs/{job}', 'show');
     Route::post('/jobs', 'store')->middleware('auth'); // only authenticated users can create jobs
     
-    // Route::get('/jobs/{job}/edit', 'edit')->middleware(['auth', 'can:edit-job,job']); // only authenticated users can edit jobs
     Route::get('/jobs/{job}/edit', 'edit')
         ->middleware('auth')
-        ->can('edit-job', 'job'); // only authenticated users can edit jobs
+        ->can('edit', 'job');
  
    Route::patch('/jobs/{job}', 'update');
     Route::delete('/jobs/{job}', 'destroy');
 });
-
-//Route::resource('jobs', JobController::class);
-
-// Route::resource('jobs', JobController::class, [
-//     'only' => ['index', 'show'] // or 'except' => ['create', 'store', 'edit', 'update', 'destroy']
-// ]);
 
 Route::view('/contact', 'contact');
 
