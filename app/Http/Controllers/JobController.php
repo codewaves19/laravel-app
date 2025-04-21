@@ -47,7 +47,7 @@ class JobController extends Controller
     // Edit
     public function edit(Job $job)
     {
-
+        // this is simple but downside is have to write again and again where ever is required
         Gate::authorize('edit-job', $job); // authorize the user to edit the job and abort if not authorized
 
         return view('jobs.edit', ['job' => $job]);
@@ -56,6 +56,7 @@ class JobController extends Controller
     public function update(Job $job)
     {
         // authorize here
+        Gate::authorize('edit-job', $job); // authorize the user to edit the job and abort if not authorized
 
         request()->validate([
             'title' => ['required', 'min:3'],
@@ -73,6 +74,7 @@ class JobController extends Controller
     public function destroy(Job $job)
     {
         // authorize here
+        Gate::authorize('edit-job', $job); // authorize the user to edit the job and abort if not authorized
         $job->delete();
         return redirect('/jobs');
     }
