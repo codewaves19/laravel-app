@@ -40,9 +40,9 @@
               <x-nav-link href="/register" :active="request()->is('register')">Register</x-nav-link>
               @endguest
               @auth
-              <form action="/logout" method="POST">
+              <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log Out</button>
+                <x-form-button type="submit">Log Out</x-form-button>
               @endauth
 
             </div>
