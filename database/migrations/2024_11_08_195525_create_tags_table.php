@@ -30,7 +30,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::dropIfExists('tags');
         Schema::dropIfExists('job_tag');
+        Schema::enableForeignKeyConstraints();
     }
 };
