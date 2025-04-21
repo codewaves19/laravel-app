@@ -47,26 +47,9 @@ class JobController extends Controller
     // Edit
     public function edit(Job $job)
     {
-        Gate::define('edit-job', function (User $user, Job $job) {
-            return $job->employer->user->is($user);
-        });
-
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
 
         Gate::authorize('edit-job', $job); // authorize the user to edit the job and abort if not authorized
 
-        // if we dont want to abort then
-        // if (Gate::denies('edit-job', $job)) {
-        //     return redirect('/jobs')->with('error', 'You are not authorized to edit this job');
-        // }
-
-
-        // authorize here
-        //if ($job->employer->user->isNot(Auth::user())) { // is employer is not same as current user
-           // abort(403);
-        //}
         return view('jobs.edit', ['job' => $job]);
     }
     // Update
