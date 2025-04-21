@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use \Log;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -38,7 +40,7 @@ class SessionController extends Controller
     // destroy_function
     public function destroy(Request $request)
     {
-        \Log::info('Request method: ' . $request->method());
+        Log::info('Request method: ' . $request->method());
 
         // logout user
         auth()->logout(); // current user
