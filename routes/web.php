@@ -19,18 +19,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home');
 
-// Route::controller(JobController::class)->group(function () {
-//     Route::get('/jobs', 'index');
-//     Route::get('/jobs/create', 'create');
-//     Route::get('/jobs/{job}', 'show');
-//     Route::post('/jobs', 'store');
-//     Route::get('/jobs/{job}/edit', 'edit');
-//     Route::patch('/jobs/{job}', 'update');
-//     Route::delete('/jobs/{job}', 'destroy');
+Route::controller(JobController::class)->group(function () {
+    Route::get('/jobs', 'index');
+    Route::get('/jobs/create', 'create');
+    Route::get('/jobs/{job}', 'show');
+    Route::post('/jobs', 'store')->middleware('auth'); // only authenticated users can create jobs
+    
+    // Route::get('/jobs/{job}/edit', 'edit')->middleware(['auth', 'can:edit-job,job']); // only authenticated users can edit jobs
+    Route::get('/jobs/{job}/edit', 'edit')
+        ->middleware('auth')
+        ->can('edit-job', 'job'); // only authenticated users can edit jobs
+ 
+   Route::patch('/jobs/{job}', 'update');
+    Route::delete('/jobs/{job}', 'destroy');
+});
 
-// });
-
-Route::resource('jobs', JobController::class)->middleware('auth'); // this will create all the routes for the resource controller
+//Route::resource('jobs', JobController::class);
 
 // Route::resource('jobs', JobController::class, [
 //     'only' => ['index', 'show'] // or 'except' => ['create', 'store', 'edit', 'update', 'destroy']
@@ -43,7 +47,7 @@ Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
 // Login
-Route::get('/login', [SessionController::class, 'create'])->name('login'); // name the route as login
+Route::get('/login', [SessionController::class, 'create']);
 Route::post('/login', [SessionController::class, 'store']);
 
 // Logout

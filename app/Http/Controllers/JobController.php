@@ -47,9 +47,6 @@ class JobController extends Controller
     // Edit
     public function edit(Job $job)
     {
-        // this is simple but downside is have to write again and again where ever is required
-        Gate::authorize('edit-job', $job); // authorize the user to edit the job and abort if not authorized
-
         return view('jobs.edit', ['job' => $job]);
     }
     // Update
