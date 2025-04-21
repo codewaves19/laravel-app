@@ -36,8 +36,10 @@ class SessionController extends Controller
     }
 
     // destroy_function
-    public function destroy()
+    public function destroy(Request $request)
     {
+        \Log::info('Request method: ' . $request->method());
+
         // logout user
         auth()->logout(); // current user
         // redirect

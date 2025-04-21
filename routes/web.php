@@ -47,4 +47,4 @@ Route::get('/login', [SessionController::class, 'create']);
 Route::post('/login', [SessionController::class, 'store']);
 
 // Logout
-Route::delete('/logout', [SessionController::class, 'destroy'])->name('logout');
+Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');

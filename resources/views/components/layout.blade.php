@@ -42,6 +42,7 @@
               @auth
               <form action="{{ route('logout') }}" method="POST">
                 @csrf
+                @method('DELETE')
                 <x-form-button type="submit">Log Out</x-form-button>
               @endauth
 
