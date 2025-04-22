@@ -2,58 +2,62 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\JobPosted;
 use App\Models\Job;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 
 class JobController extends Controller
 {
-    // index
     public function index()
     {
-        $jobs = Job::with('employer')->latest()->paginate(3);
+        $jobs = Job::with('employer')->latest()->simplePaginate(3);
+
         return view('jobs.index', [
             'jobs' => $jobs
         ]);
     }
-    // Create
+
     public function create()
     {
         return view('jobs.create');
     }
-    // Show
+
     public function show(Job $job)
     {
         return view('jobs.show', ['job' => $job]);
     }
-    // Store
+
     public function store()
     {
         request()->validate([
             'title' => ['required', 'min:3'],
             'salary' => ['required']
         ]);
-        // if the above validation fails it will never run the next link and returns back to previous url
-        Job::create([
+
+        $job = Job::create([
             'title' => request('title'),
             'salary' => request('salary'),
             'employer_id' => 1
         ]);
 
-        return redirect('jobs');
+        Mail::to($job->employer->user)->send(
+            new JobPosted($job)
+        );
+
+        return redirect('/jobs');
     }
-    // Edit
+
     public function edit(Job $job)
     {
         return view('jobs.edit', ['job' => $job]);
     }
-    // Update
+
     public function update(Job $job)
     {
-        // authorize here
-        Gate::authorize('edit-job', $job); // authorize the user to edit the job and abort if not authorized
+        Gate::authorize('edit-job', $job);
 
         request()->validate([
             'title' => ['required', 'min:3'],
@@ -62,17 +66,18 @@ class JobController extends Controller
 
         $job->update([
             'title' => request('title'),
-            'salary' => request('salary')
+            'salary' => request('salary'),
         ]);
 
         return redirect('/jobs/' . $job->id);
     }
-    // Destroy
+
     public function destroy(Job $job)
     {
-        // authorize here
-        Gate::authorize('edit-job', $job); // authorize the user to edit the job and abort if not authorized
+        Gate::authorize('edit-job', $job);
+
         $job->delete();
+
         return redirect('/jobs');
     }
 }
