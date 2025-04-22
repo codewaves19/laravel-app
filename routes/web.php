@@ -6,12 +6,16 @@ use App\Http\Controllers\SessionController;
 use App\Mail\JobPosted;
 use Illuminate\Support\Facades\Route;
 
+// Route::get('test', function () {
+//     \Illuminate\Support\Facades\Mail::to('dayalmanisha14@gmail.com')->send(
+//         new \App\Mail\JobPosted($job=\App\Models\Job::factory()->create())
+//     );
+//     return 'Done';
+// });
+
 Route::get('test', function () {
-    // return new App\Mail\JobPosted(
-    //     App\Models\Job::factory()->create()
-    // );
     \Illuminate\Support\Facades\Mail::to('dayalmanisha14@gmail.com')->send(
-        new \App\Mail\JobPosted($job=\App\Models\Job::factory()->create())
+        new \App\Mail\JobPosted()
     );
     return 'Done';
 });

@@ -14,6 +14,7 @@ return [
     */
 
     'default' => env('MAIL_MAILER', 'smtp'),
+    // 'default' => env('MAIL_MAILER', 'log'), this will log message to log file and will not send to mail server
 
     /*
     |--------------------------------------------------------------------------

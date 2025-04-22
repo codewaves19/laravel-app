@@ -17,7 +17,7 @@ class JobPosted extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public Job $job)
+    public function __construct()
     {
         //
     }
@@ -29,7 +29,7 @@ class JobPosted extends Mailable
     {
         return new Envelope(
             subject: 'Job Posted',
-            from: 'manisha.dayal@vidyamantra.com'
+           // from: 'manisha.dayal@vidyamantra.com' // this will overwrite global address given n env file
         );
     }
 
