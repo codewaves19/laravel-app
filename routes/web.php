@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 //     return 'Done';
 // });
 
-Route::get('test', function () {
-    \Illuminate\Support\Facades\Mail::to('dayalmanisha14@gmail.com')->send(
-        new \App\Mail\JobPosted()
-    );
-    return 'Done';
-});
+// Route::get('test', function () {
+//     \Illuminate\Support\Facades\Mail::to('dayalmanisha14@gmail.com')->send(
+//         new \App\Mail\JobPosted()
+//     );
+//     return 'Done';
+// });
 
 Route::view('/', 'home');
 Route::view('/contact', 'contact');

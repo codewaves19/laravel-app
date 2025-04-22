@@ -17,7 +17,7 @@ class JobPosted extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public Job $job)
     {
         //
     }
@@ -29,7 +29,8 @@ class JobPosted extends Mailable
     {
         return new Envelope(
             subject: 'Job Posted',
-           // from: 'manisha.dayal@vidyamantra.com' // this will overwrite global address given n env file
+            from: 'manisha.dayal@vidyamantra.com', // this will overwrite global address given n env file
+            to: 'dayalmanisha14@gmail.com'
         );
     }
 
@@ -39,7 +40,10 @@ class JobPosted extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.job-posted'
+            view: 'mail.job-posted',
+            // with: [
+            //     'title' => $this->job->title,
+            // ],
         );
     }
 
